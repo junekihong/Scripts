@@ -7,15 +7,11 @@
 # http://www.howtoforge.com/using-google-translate-from-the-command-line
 # I adapted this script to python
 
-# TODO: Put in an option to bring up your default web browser. 
-
 import subprocess
-from subprocess import call
 import pycurl
 import StringIO
 import argparse
 import sys
-
 
 # Set up pycurl. 
 # Example taken from http://pycurl.sourceforge.net/doc/curlobject.html
@@ -111,7 +107,7 @@ def printHelp(parser):
     print
 
     print "\nAvailable languages:"
-    print "---------------------\n"
+    print "---------------------"
 
     printLanguageOptions(curl)
     exit()
@@ -129,7 +125,7 @@ except IndexError:
     printHelp(parser)
 
 # We need to change exchange all the whitespaces in the SENTENCE to "+"
-#SENTENCE = SENTENCE.replace(" ", "+")
+SENTENCE = SENTENCE.replace(" ", "+")
 
 
 if (args.verbose and not args.silent):
@@ -148,8 +144,6 @@ else:
     output,err = sed.communicate()
 
     print output
-
-
 
 
 # Using python for the curl command was pretty frustrating because of how it handled Unicode
