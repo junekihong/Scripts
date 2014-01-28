@@ -123,12 +123,13 @@ if args.helpFlag:
 try:
     FROM = args.strings[0]
     TO = args.strings[1]
-    SENTENCE = args.strings[2]
+    SENTENCE = args.strings[2:]
+    SENTENCE = "+".join(SENTENCE)
 except IndexError:
     printHelp(parser)
 
 # We need to change exchange all the whitespaces in the SENTENCE to "+"
-SENTENCE = SENTENCE.replace(" ", "+")
+#SENTENCE = SENTENCE.replace(" ", "+")
 
 
 if (args.verbose and not args.silent):
