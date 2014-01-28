@@ -1,0 +1,5 @@
+#!/bin/sh
+
+
+#echo something \"$*\"
+./googletranslate.py auto en $*
