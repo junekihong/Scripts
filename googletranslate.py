@@ -122,7 +122,13 @@ try:
     SENTENCE = args.strings[2:]
     SENTENCE = "+".join(SENTENCE)
 except IndexError:
-    printHelp(parser)
+    try:
+        FROM = "auto"
+        TO = "en"
+        SENTENCE = args.strings[0:]
+        SENTENCE = "+".join(SENTENCE)
+    except IndexError:
+        printHelp(parser)
 
 # We need to change exchange all the whitespaces in the SENTENCE to "+"
 SENTENCE = SENTENCE.replace(" ", "+")
@@ -135,10 +141,16 @@ if (args.browser):
     URL = "http://translate.google.com/#"+FROM+"/"+TO+"/"+SENTENCE    
     call(["google-chrome", URL])
 else:
-    URL = "http://translate.google.com/m?hl=en&sl="+FROM+"&tl="+TO+"&ie=UTF-8&prev=_m&q="+SENTENCE
+    URL = "https://translate.google.com/m?hl=en&sl="+FROM+"&tl="+TO+"&ie=UTF-8&prev=_m&q="+SENTENCE
+
+
+    #print URL
+    #print "https://translate.google.com/m?hl=en&sl=auto&tl=pl&ie=UTF-8&prev=_m&q=Mary+had+a+little+lamb"
+
 
     # Enviornment call out to curl.
-    curl = subprocess.Popen(["curl", "-s", "--user-agent", "Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) QupZilla/1.3.1 Safari/534.34", URL], stdout=subprocess.PIPE)
+    curl = subprocess.Popen(["curl", "-s", "--user-agent", "Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) QupZilla/1.3.1 Safari/534.34", URL], stdout=subprocess.PIPE)    
+
     sed = subprocess.Popen(["sed", "-n", "s/.*class=\"t0\">//;s/<.*$//p"], stdin=curl.stdout, stdout=subprocess.PIPE)
     curl.stdout.close()
     output,err = sed.communicate()
