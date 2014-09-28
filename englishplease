@@ -2,4 +2,4 @@
 
 
 #echo something \"$*\"
-./googletranslate.py auto en $*
+googletranslate.py auto en $*
