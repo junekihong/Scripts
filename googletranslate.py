@@ -87,11 +87,12 @@ parser.add_argument("-v", "--verbose", dest='verbose', default=True, action="sto
                     help='Prints out extra things that may help helpfullness, and readably. (On by default)')
 parser.add_argument("-s", "--silent", dest="silent", default=False, action="store_true",
                     help="Suppresses the extra print statements. Only prints out the results.")
+parser.add_argument("-f", "--filein", dest="filename", default=None, 
+                    help="Specify a file to read from")
 parser.add_argument("-b", "--browser", dest="browser", default=False, action="store_true",
                     help="Opens up your default browser instead of a command line output")
 parser.add_argument("-h", "--help", dest="helpFlag", default=False, action="store_true", 
                     help="show this message and exit.")
-
 parser.add_argument('strings', nargs='*')
 
 args = parser.parse_args()
@@ -106,7 +107,7 @@ def printHelp(parser):
     print sys.argv[0]+" en pl \"Mary had a little lamb\""
     print
 
-    print "\nAvailable languages:"
+    print "Available languages:"
     print "---------------------"
 
     printLanguageOptions(curl)
@@ -119,7 +120,12 @@ if args.helpFlag:
 try:
     FROM = args.strings[0]
     TO = args.strings[1]
-    SENTENCE = args.strings[2:]
+    if (args.filename):
+        f = open(args.filename)
+        f = f.readlines()
+        SENTENCE = " ".join(f).split()
+    else:
+        SENTENCE = args.strings[2:]
     SENTENCE = "+".join(SENTENCE)
 except IndexError:
     try:
