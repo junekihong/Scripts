@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Python
+find . -name "*.pyc" -delete
+
+# Latex
+find . -name "*.aux" -delete
+find . -name "*.out" -delete
+find . -name "*.log" -delete
+
+# Latex Beamer
+find . -name "*.toc" "*.nav" "*.snm" -delete
+
+# Crap temp files
+find . -name "*~" -delete
+
+
