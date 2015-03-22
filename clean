@@ -7,9 +7,13 @@ find . -name "*.pyc" -delete
 find . -name "*.aux" -delete
 find . -name "*.out" -delete
 find . -name "*.log" -delete
+find . -name "*.bbl" -delete
+find . -name "*.blg" -delete
 
 # Latex Beamer
-find . -name "*.toc" "*.nav" "*.snm" -delete
+find . -name "*.toc" -delete
+find . -name "*.nav" -delete
+find . -name "*.snm" -delete
 
 # Crap temp files
 find . -name "*~" -delete
