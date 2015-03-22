@@ -1,0 +1,34 @@
+#!/bin/sh
+
+if [ $1 ];
+then
+
+xrandr --output CRT1 --mode $1 --pos 1366x0 --output LVDS --mode 1366x768 --pos 0x0
+
+else
+
+# 9/18/13
+# Use xrandr to change monitor resolution and manage dual monitors.
+#xrandr --output VGA1 --mode 1920x1080 --pos 1366x0 --output LVDS1 --mode 1366x768 --pos 0x0
+
+xrandr --output CRT1 --auto --pos 1366x0 --output DFP1 --auto --pos 1366x0 --output LVDS --mode 1366x768 --pos 0x0
+#xrandr --output CRT1 --auto --pos 0x768 --output LVDS --mode 1366x768 --pos 0x0
+
+
+fi
+
+
+success=$?
+
+if [ "$success" != "0" ];
+then
+
+xrandr
+
+echo
+echo
+echo "usage:  
+> dualMonitor_ON.sh [resolution]"
+echo 
+
+fi 
