@@ -114,7 +114,7 @@ def printHelp(parser):
     exit()
 
 
-if args.helpFlag:
+if args.helpFlag or not args.strings:
     printHelp(parser)
 
 try:
