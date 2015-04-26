@@ -11,8 +11,9 @@ else
 # Use xrandr to change monitor resolution and manage dual monitors.
 #xrandr --output VGA1 --mode 1920x1080 --pos 1366x0 --output LVDS1 --mode 1366x768 --pos 0x0
 
-xrandr --output CRT1 --auto --pos 1366x0 --output DFP1 --auto --pos 1366x0 --output LVDS --mode 1366x768 --pos 0x0
-#xrandr --output CRT1 --auto --pos 0x768 --output LVDS --mode 1366x768 --pos 0x0
+xrandr --output CRT1 --auto --pos 1367x0 --output DFP1 --auto --pos 1367x0 --output LVDS --auto --pos 0x0
+
+# The main screen is LVDS with --mode 1366x768
 
 
 fi
