@@ -1,19 +1,54 @@
 #!/usr/bin/env python
 
-from conll_utils import *
+import argparse
 
-def printSentences():
-    lines = readInput()
-    sentences = getSentences(lines)
+parser = argparse.ArgumentParser(description="Print out the sentences of a conll file.")
+parser.add_argument("-cpos","--CPOS", dest="CPOS", default=False, action="store_true", 
+                    help="Prints out the CPOS tag with the words.")
+#parser.add_argument()
+#parser.add_argument()
+parser.add_argument("strings", nargs="*")
+
+
+def getSentences(conll_files):
+    sentences = []
+    sentence = []
+    for conll in conll_files:
+        f = open(conll)
+        f = f.readlines()
+        
+        for word in f:
+            word = word.strip()
+
+            if word:
+                sentence += [word]
+            else:
+                sentences += [sentence]
+                sentence = []
+        if sentence:
+            sentences += [sentence]
+            sentence = []
+    return sentences
+
+def printSentences(conll_files, CPOS):
+    sentences = getSentences(conll_files)
 
     for sentence in sentences:
-        printedSentence = []    
+        printedSentence = []
         for word in sentence:
-            word = word.split("\t")[1]
+            word = word.split("\t")
+
+            if CPOS:
+                word = word[1]+"/"+word[3]
+            else:
+                word = word[1]
             printedSentence.append(word)
 
         printedSentence = " ".join(printedSentence)
         print printedSentence
 
 if __name__ == "__main__":
-    printSentences()
+    args = parser.parse_args()
+
+    printSentences(args.strings, args.CPOS)
+
